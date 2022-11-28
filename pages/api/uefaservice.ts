@@ -25,7 +25,6 @@ export class UefaService {
     position?: string;
     type?: string;
   }) {
-    console.log(data);
     const res = await this.client.get(
       `api/v1/uefa?player_names=${data.player_name || ""}&club_names=${
         data.club_name || ""

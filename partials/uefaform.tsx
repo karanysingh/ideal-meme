@@ -4,6 +4,8 @@ import { Table } from "../components/table";
 import { UefaService } from "../pages/api/uefaservice";
 import useSWR from "swr";
 import { useFetcher } from "../pages/api/useFetcher";
+import { BarGraph } from "../components/BarChart";
+import { Heatmap } from "../components/Heatmap";
 
 interface Option {
     key: string
@@ -61,6 +63,22 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
                 <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
                 <Table headings={replaceUnderscoresBySpaces(Object.keys(uefaData[0]))} data={uefaData.map(ele => Object.values(ele))}></Table>
             </>
+        )
+    }
+    else if (uefaData && uefaData.length > 0 && option.key == "goals_in_position") {
+        return (
+            <>
+                <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+                <BarGraph data={uefaData}></BarGraph>
+            </>
+        )
+    }
+    else if (uefaData && uefaData.length > 0 && option.key == "club_player_stats") {
+        console.log("uefaData", uefaData)
+        return (<>
+            <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+            <Heatmap playerdata={uefaData}></Heatmap>
+        </>
         )
     }
     else {
