@@ -8,7 +8,7 @@ interface Option {
 export const Form = ({ option, handleOnSubmit }: { option: Option, handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void }) => {
     return (
         <form onSubmit={handleOnSubmit}>
-            <div className="flex flex-row gap-4 items-center">
+            <div className="flex flex-row gap-4 items-center px-4">
                 {
                     option.placeholder.map((placeholder, index) => (
                         <>

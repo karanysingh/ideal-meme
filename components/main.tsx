@@ -18,7 +18,7 @@ interface Options {
 export const Main = () => {
     const [option, setOption] = useState("home");
 
-    const [params, setParams] = useState<{ [key: string]: string }>({
+    const [params, setParams] = useState<{ [key: string]: any }>({
         player_name: "",
         club_name: "",
         position: "",
@@ -78,7 +78,7 @@ export const Main = () => {
     return (
         <>
             <MenuBar selected={option} options={options} handleMenuSelect={handleMenuSelect} />
-            <div className="border-10 border-secondary w-full mt-10">
+            <div className="border-10 border-secondary w-full mt-10 p-2">
                 <Heading text={options[option].display} />
                 <UEFAForm params={params} handleOnSubmit={handleOnSubmit} option={options[option]} />
             </div>

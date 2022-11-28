@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { useFetcher } from "../pages/api/useFetcher";
 import { BarGraph } from "../components/BarChart";
 import { Heatmap } from "../components/Heatmap";
+import { Heading } from "../components/heading";
 
 interface Option {
     key: string
@@ -61,7 +62,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
         return (
             <>
                 <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
-                <Table headings={replaceUnderscoresBySpaces(Object.keys(uefaData[0]))} data={uefaData.map(ele => Object.values(ele))}></Table>
+                <Table headings={replaceUnderscoresBySpaces(Object.keys(uefaData[0]))} data={uefaData.map((ele: any) => Object.values(ele))}></Table>
             </>
         )
     }
