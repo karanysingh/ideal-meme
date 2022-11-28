@@ -1,0 +1,72 @@
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import { Form } from "../components/form";
+import { Table } from "../components/table";
+import { UefaService } from "../pages/api/uefaservice";
+import useSWR from "swr";
+import { useFetcher } from "../pages/api/useFetcher";
+
+interface Option {
+    key: string
+    display: string
+    fieldName: string[]
+    placeholder: string[]
+}
+
+
+export const UEFAForm = ({ option, params, handleOnSubmit }: {
+    option: Option, params: {
+        [key: string]: string
+    }, handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+}) => {
+
+    const { data: uefaData, isLoading, isError } = useFetcher(params)
+    const replaceUnderscoresBySpaces = (arr: string[]) => {
+        return arr.map((item) => item.replace(/_/g, " "))
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+    if (isError) {
+        return (
+            <>
+                <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+                <p>some error occurred</p>
+            </>
+        )
+
+    }
+    if (uefaData && option.key == "home") {
+        return (
+            <>
+                <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+                <Table headings={replaceUnderscoresBySpaces(Object.keys(uefaData))} data={[Object.values(uefaData)]}></Table>
+            </>
+        )
+    }
+
+    else if (uefaData && uefaData.length > 0 && option.key == "player_stats") {
+
+        return (
+            <>
+                <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+                <Table headings={replaceUnderscoresBySpaces(Object.keys(uefaData[0]))} data={[Object.values(uefaData[0])]}></Table>
+            </>
+
+        )
+    }
+    else if (uefaData && uefaData.length > 0 && option.key == "club_stats") {
+        return (
+            <>
+                <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+                <Table headings={replaceUnderscoresBySpaces(Object.keys(uefaData[0]))} data={uefaData.map(ele => Object.values(ele))}></Table>
+            </>
+        )
+    }
+    else {
+        return <>
+            <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
+        </>
+    }
+
+}
