@@ -11,7 +11,6 @@ interface Option {
     placeholder: string[]
 }
 
-
 export const UEFAForm = ({ option, params, handleOnSubmit }: {
     option: Option, params: {
         [key: string]: string
@@ -19,6 +18,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
 }) => {
 
     const { data: uefaData, isLoading, isError } = useFetcher(params)
+
     const replaceUnderscoresBySpaces = (arr: string[]) => {
         return arr.map((item) => item.replace(/_/g, " "))
     }
@@ -26,6 +26,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
     if (isLoading) {
         return <div>Loading...</div>
     }
+
     if (isError) {
         return (
             <>
@@ -35,6 +36,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
         )
 
     }
+
     if (uefaData && option.key == "home") {
         return (
             <>
@@ -45,7 +47,6 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
     }
 
     else if (uefaData && uefaData.length > 0 && option.key == "player_stats") {
-
         return (
             <>
                 <Form option={option} handleOnSubmit={handleOnSubmit}></Form>
@@ -54,6 +55,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
 
         )
     }
+
     else if (uefaData && uefaData.length > 0 && option.key == "club_stats") {
         return (
             <>
@@ -62,6 +64,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
             </>
         )
     }
+
     else if (uefaData && uefaData.length > 0 && option.key == "goals_in_position") {
         return (
             <>
@@ -70,6 +73,7 @@ export const UEFAForm = ({ option, params, handleOnSubmit }: {
             </>
         )
     }
+
     else if (uefaData && uefaData.length > 0 && option.key == "club_player_stats") {
         console.log("uefaData", uefaData)
         return (<>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SquareCol } from "./squares";
 
 interface PlayerStats {
     name: string;
@@ -26,39 +27,7 @@ interface PlayerStats {
     };
 }
 
-const Squares = ({ opacity, color, text }: {
-    opacity: number,
-    color: string,
-    text?: number
-}) => {
-    return (
-        <div style={{ opacity: opacity, backgroundColor: color }} className="h-10 w-10 border flex items-center justify-center" >
-            {text || 0}
-        </div>
-    )
-}
-
-const SquareCol = (data: {
-    data: number[],
-    pivot: number,
-    player_name: string,
-}) => {
-    console.log(data)
-    return (<div className="flex flex-col">
-        <div className="flex flex-col gap-2 mt-10 justify-end w-10">
-            <div className="text-[10px] wrap mb-10 h-4">{data.player_name}</div>
-            {data.data && data.data.length > 0 &&
-                data.data.map((ele, index) => (
-                    <Squares opacity={ele / data.pivot + 0.2} color={"blue"} text={ele} key={index} />
-                ))
-            }
-        </div>
-    </div>
-    )
-}
-
 export const Heatmap = ({ playerdata }: { playerdata: PlayerStats[] }) => {
-    console.log(playerdata)
     const [type, setType] = useState("attack")
 
     const getData = (type: string) => {
@@ -113,6 +82,8 @@ export const Heatmap = ({ playerdata }: { playerdata: PlayerStats[] }) => {
 
     return (
         <div className="border border-secondary p-2 mt-10">
+
+            {/* Toggle */}
             Toggle with: &nbsp;
             <select onChange={e => { setType(e.target.value) }}>
                 <option value="attack">Attack</option>
@@ -121,6 +92,8 @@ export const Heatmap = ({ playerdata }: { playerdata: PlayerStats[] }) => {
             </select>
 
             <div className="grid grid-rows-22 grid-flow-col gap-4">
+
+                {/* Labels */}
                 <div className="flex flex-col flex-1 gap-2 justify-center mt-8">
                     <div className="text-[10px] wrap mb-8 h-4">
                         PLAYER /<br></br>
@@ -138,6 +111,8 @@ export const Heatmap = ({ playerdata }: { playerdata: PlayerStats[] }) => {
                                 )) : <div></div>
                     }
                 </div>
+
+                {/* HeatGraph */}
                 {arr && arr.length > 0 &&
                     arr?.map((ele, index) => (
                         <SquareCol data={ele} key={index} pivot={pivot} player_name={playerdata[index].name} />

@@ -17,6 +17,7 @@ export class UefaService {
         data.club_name || ""
       }&position=${data.position || ""}&type=${data.type || ""}`
     );
+
     return res;
   }
 }

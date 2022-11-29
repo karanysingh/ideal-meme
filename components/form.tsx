@@ -12,7 +12,8 @@ export const Form = ({ option, handleOnSubmit }: { option: Option, handleOnSubmi
                 {
                     option.placeholder.map((placeholder, index) => (
                         <>
-                            {option.fieldName[index] === "type" ?
+                            {
+                                option.fieldName[index] === "type" ?
                                 <>
                                     <select name="type" className="border-white  px-4 py-4 outline-none bg-secondary mt-2 rounded-lg">
                                         <optgroup label="Select Type">
@@ -28,6 +29,8 @@ export const Form = ({ option, handleOnSubmit }: { option: Option, handleOnSubmi
                             } </>
                     ))
                 }
+
+
                 {
                     option.placeholder.length > 0
                         ? <button className="w-20 rounded-full border h-20 hover:scale-125 ease-in-out duration-200" type="submit">Go</button>
