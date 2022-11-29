@@ -12,7 +12,6 @@ export const BarGraph = ({ data }: {
     return (
         <div className="w-full">
             <BarChart width={720} height={250} data={data}>
-                {/* <CartesianGrid strokeDasharray="3 3" /> */}
                 <XAxis dataKey="club_name" />
                 <YAxis />
                 <Legend />
