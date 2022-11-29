@@ -1,12 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { Form } from "../components/form";
 import { Table } from "../components/table";
-import { UefaService } from "../pages/api/uefaservice";
-import useSWR from "swr";
 import { useFetcher } from "../pages/api/useFetcher";
 import { BarGraph } from "../components/BarChart";
-import { Heatmap } from "../components/Heatmap";
-import { Heading } from "../components/heading";
+import { Heatmap } from "../components/heatmap";
 
 interface Option {
     key: string
