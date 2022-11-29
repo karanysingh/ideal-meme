@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export class UefaService {
-  private static readonly server_url: string = process.env.NEXT_PUBLIC_API_URL;
+  private static readonly server_url: string =
+    process.env.NEXT_PUBLIC_API_URL || "";
   private static readonly client = axios.create({
     baseURL: this.server_url,
   });
